@@ -1,0 +1,43 @@
+/* lightTheme.css */
+
+/* Define light theme custom properties */
+:root {
+    --background-color: #f7fafc; /* Light background */
+    --text-color: #1a202c;       /* Dark text */
+    --primary-color: #2b6cb0;    /* Blue for primary elements */
+    --secondary-color: #e2e8f0;  /* Lighter accent color */
+  }
+  
+  /* Apply the light theme colors */
+  body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
+  
+  /* Example styling for header, footer, buttons, and links */
+  .header, .sidebar, .footer {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+  }
+  
+  .button {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
+  
+  .button:hover {
+    opacity: 0.9;
+  }
+  
+  .link {
+    color: var(--primary-color);
+    text-decoration: none;
+  }
+  
+  .link:hover {
+    text-decoration: underline;
+  }
+  

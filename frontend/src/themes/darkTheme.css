@@ -1,0 +1,43 @@
+/* darkTheme.css */
+
+/* Define dark theme custom properties */
+:root {
+    --background-color: #1a202c; /* Dark background */
+    --text-color: #f7fafc;       /* Light text */
+    --primary-color: #4299e1;    /* Blue for primary elements */
+    --secondary-color: #2d3748;  /* Darker accent color */
+  }
+  
+  /* Apply the dark theme colors */
+  body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
+  
+  /* Example styling for header, footer, buttons, and links */
+  .header, .sidebar, .footer {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+  }
+  
+  .button {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
+  
+  .button:hover {
+    opacity: 0.9;
+  }
+  
+  .link {
+    color: var(--primary-color);
+    text-decoration: none;
+  }
+  
+  .link:hover {
+    text-decoration: underline;
+  }
+  

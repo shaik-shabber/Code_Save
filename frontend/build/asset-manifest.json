@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/shaik-shabber.github.io/CodeSave/static/css/main.3a123058.css",
+    "main.js": "/shaik-shabber.github.io/CodeSave/static/js/main.43e5524e.js",
+    "index.html": "/shaik-shabber.github.io/CodeSave/index.html",
+    "main.3a123058.css.map": "/shaik-shabber.github.io/CodeSave/static/css/main.3a123058.css.map",
+    "main.43e5524e.js.map": "/shaik-shabber.github.io/CodeSave/static/js/main.43e5524e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3a123058.css",
+    "static/js/main.43e5524e.js"
+  ]
+}
