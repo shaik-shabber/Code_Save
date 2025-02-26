@@ -1,26 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Search, Moon, Sun, User, Menu } from 'lucide-react';
 import useStore from '../store/useStore';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Sidebar from './Sidebar';
 
 const Header = () => {
-  const {
-    isDarkMode,
-    toggleDarkMode,
-    searchProblems,
-    searchResults,
-    setSelectedProblem,
-    logout,
-    user,
-  } = useStore();
+  const { isDarkMode, toggleDarkMode, searchProblems, searchResults, setSelectedProblem, logout, user } = useStore();
   const [searchQuery, setSearchQuery] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
-
   const sidebarRef = useRef(null);
   const menuButtonRef = useRef(null);
   const userMenuRef = useRef(null);
@@ -64,11 +54,7 @@ const Header = () => {
       ) {
         setIsSidebarOpen(false);
       }
-      if (
-        isUserMenuOpen &&
-        userMenuRef.current &&
-        !userMenuRef.current.contains(e.target)
-      ) {
+      if (isUserMenuOpen && userMenuRef.current && !userMenuRef.current.contains(e.target)) {
         setIsUserMenuOpen(false);
       }
     };
@@ -89,9 +75,7 @@ const Header = () => {
           >
             <Menu className="w-6 h-6 text-gray-600 dark:text-white" />
           </button>
-          <span className="text-2xl font-bold text-blue-500 dark:text-white">
-            CODE SAVE
-          </span>
+          <span className="text-2xl font-bold text-blue-500 dark:text-white">CODE SAVE</span>
         </div>
         <div className="flex-1 relative mx-4">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -112,18 +96,12 @@ const Header = () => {
                     onClick={() => handleSearchResultClick(problem.problemId)}
                     className="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                   >
-                    <div className="text-gray-900 dark:text-white">
-                      {problem.title}
-                    </div>
-                    <div className="text-sm text-gray-500 dark:text-white">
-                      {problem.difficulty}
-                    </div>
+                    <div className="text-gray-900 dark:text-white">{problem.title}</div>
+                    <div className="text-sm text-gray-500 dark:text-white">{problem.difficulty}</div>
                   </button>
                 ))
               ) : (
-                <div className="px-4 py-2 text-gray-500 dark:text-white">
-                  No problems found
-                </div>
+                <div className="px-4 py-2 text-gray-500 dark:text-white">No problems found</div>
               )}
             </div>
           )}

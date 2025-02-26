@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import useStore from '../store/useStore'; // Import Zustand store
 
 const Register = () => {
-  const [name, setName] = useState(''); // New name field
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showModal, setShowModal] = useState(false);
-  // We no longer call setUser because after successful registration the user must login.
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
@@ -22,13 +20,11 @@ const Register = () => {
       const res = await fetch(`${process.env.REACT_APP_API_URL}/api/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        // Include name in the request body along with email and password
         body: JSON.stringify({ name, email, password }),
       });
       const data = await res.json();
 
       if (res.ok) {
-        // Show the success modal instead of logging in immediately
         setShowModal(true);
       } else {
         alert(data.message || 'Registration failed');
@@ -41,15 +37,12 @@ const Register = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
-      {/* Title above the registration card */}
       <h1 className="text-6xl font-bold text-blue-500 mb-8">Code Save</h1>
-      
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8 w-full max-w-md">
         <h2 className="text-2xl font-bold mb-6 text-center text-gray-800 dark:text-gray-100">
           Register
         </h2>
         <form onSubmit={handleRegister}>
-          {/* New Name Input */}
           <div className="mb-4">
             <label htmlFor="name" className="block text-gray-700 dark:text-gray-200 mb-2">
               Name
@@ -120,8 +113,6 @@ const Register = () => {
           </Link>
         </p>
       </div>
-
-      {/* Success Modal */}
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white dark:bg-gray-800 p-6 rounded shadow-md">

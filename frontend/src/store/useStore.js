@@ -513,6 +513,60 @@ const useStore = create(
         }
       },
 
+      // DELETE the solved problem (unmark as solved)
+      deleteSolved: async (problemId) => {
+        try {
+          const state = get();
+          let problem;
+          for (const topic of state.topics) {
+            if (topic.problems[problemId]) {
+              problem = topic.problems[problemId];
+              break;
+            }
+          }
+          if (!problem) return;
+          const token = state.token;
+          const url = `${process.env.REACT_APP_API_URL}/api/users/solved`;
+          const res = await fetch(url, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({ problemId }),
+          });
+          if (res.ok) {
+            set((state) => ({
+              topics: state.topics.map((topic) => {
+                if (topic.problems[problemId]) {
+                  return {
+                    ...topic,
+                    problems: {
+                      ...topic.problems,
+                      [problemId]: {
+                        ...topic.problems[problemId],
+                        isSolved: false,
+                      },
+                    },
+                  };
+                }
+                return topic;
+              }),
+              selectedProblem:
+                state.selectedProblem &&
+                state.selectedProblem.problemId === problemId
+                  ? {
+                      ...state.selectedProblem,
+                      isSolved: false,
+                    }
+                  : state.selectedProblem,
+            }));
+          }
+        } catch (error) {
+          console.error('Error deleting solved problem:', error);
+        }
+      },
+
       // --------------------------
       // AUTHENTICATION HELPER
       // --------------------------

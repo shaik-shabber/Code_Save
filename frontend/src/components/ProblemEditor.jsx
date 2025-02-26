@@ -20,6 +20,7 @@ const ProblemEditor = ({ edit = false }) => {
   const toggleFavorite = useStore((state) => state.toggleFavorite);
   const toggleSavedForLater = useStore((state) => state.toggleSavedForLater);
   const toggleSolved = useStore((state) => state.toggleSolved);
+  const deleteSolved = useStore((state) => state.deleteSolved);
 
   // Initialize edit mode from prop or URL query.
   const [isEditing, setIsEditing] = useState(edit);
@@ -104,15 +105,24 @@ const ProblemEditor = ({ edit = false }) => {
     }
   }, [isEditing, selectedProblem, toggleSavedForLater]);
 
+  // Updated onToggleSolved: if solved, call deleteSolved; otherwise, call toggleSolved.
   const onToggleSolved = useCallback(() => {
     if (!isEditing && selectedProblem) {
-      toggleSolved(selectedProblem.problemId);
-      setIsSolved((prev) => !prev);
-      setEditedProblem((prev) =>
-        prev ? { ...prev, isSolved: !prev.isSolved } : prev
-      );
+      if (isSolved) {
+        deleteSolved(selectedProblem.problemId);
+        setIsSolved(false);
+        setEditedProblem((prev) =>
+          prev ? { ...prev, isSolved: false } : prev
+        );
+      } else {
+        toggleSolved(selectedProblem.problemId);
+        setIsSolved(true);
+        setEditedProblem((prev) =>
+          prev ? { ...prev, isSolved: true } : prev
+        );
+      }
     }
-  }, [isEditing, selectedProblem, toggleSolved]);
+  }, [isEditing, selectedProblem, isSolved, toggleSolved, deleteSolved]);
 
   const handleMouseDown = useCallback(
     (e) => {
