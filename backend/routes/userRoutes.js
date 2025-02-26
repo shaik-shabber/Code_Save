@@ -9,9 +9,9 @@ const {
   addSavedForLater,
   removeSavedForLater,
   markSolved,
+  unmarkSolved,
 } = require('../controllers/userController');
 
-// All user routes are protected
 router.use(authMiddleware);
 
 router.get('/profile', getProfile);
@@ -21,5 +21,6 @@ router.delete('/favorites', removeFavorite);
 router.post('/saved', addSavedForLater);
 router.delete('/saved', removeSavedForLater);
 router.post('/solved', markSolved);
+router.delete('/solved', unmarkSolved);
 
 module.exports = router;
